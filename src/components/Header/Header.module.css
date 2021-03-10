@@ -1,0 +1,14 @@
+.header{
+  background-color: red;
+ grid-area: h;
+}
+
+.logo{
+  width: 60px;
+  height: 60px;
+
+}
+
+.logo img{
+   max-width: 100%;
+}

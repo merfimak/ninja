@@ -1,17 +1,26 @@
+import reportWebVitals from './reportWebVitals';
+//import state from './redux/state.js';
+//import {addPost} from './redux/state.js';
+//import {updateVewPostText} from './redux/state.js';
+//import {subscribe} from './redux/state.js';
+import store from './redux/state.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
+
+let rerenderEntireTree = () =>{
+	ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App state={store.getState} addPost={store.addPost} updateVewPostText={store.updateVewPostText}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
+}
+rerenderEntireTree();
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+store.subscribe(rerenderEntireTree);// взяли из state и тудаже закинули rerenderEntireTree - хуй пойми зачем
+
+
 reportWebVitals();

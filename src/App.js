@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header/Header';
+import NavBar from './components/NavBar/NavBar';
+import Profile from './components/Profile/Profile';
+import Dialogs from './components/Dialogs/Dialogs';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-function App() {
+
+const App = (props) => {
+  //console.log(props)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  	<Router>
+    <div className="app_wrepper">
+
+        <Header />
+        <NavBar />
+        <div className="app_wrepper_content">      
+        <Route path="/dialogs" render={ () => <Dialogs  dialogsData={props.state.massagesPage.dialogsData} massagesData={props.state.massagesPage.massagesData} /> } />
+        <Route path="/profile" render={ () => <Profile   postData={props.state.profilePage.postData} newPostText={props.state.profilePage.newPostText} addPost={props.addPost} updateVewPostText={props.updateVewPostText}/> } />
+        </div>
+          
+        
+         
+
+
+         
+           
+     </div>
+     </Router>
+  )
 }
+
+
+
+
+
 
 export default App;
