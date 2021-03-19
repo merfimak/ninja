@@ -1,6 +1,8 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
 import { NavLink} from 'react-router-dom';
+import {sendMessageCreator} from '../../redux/state.js';
+import {updateNewMessageCreator} from '../../redux/state.js';
 
 const DialogItem = (props) =>{
 
@@ -31,10 +33,19 @@ const Massage = (props) =>{
 const Dialogs = (props) => {
 	
 
-	let newMassagElem = React.createRef();
+	
 	let addMassag = () =>{
-		let text = newMassagElem.current.value;
-		alert(text)
+		//let text = newMassagElem.current.value;
+		 props.dispatch(sendMessageCreator());
+	};
+
+
+
+
+
+	let onMessageChange = (event) =>{
+		let body = event.target.value;
+		 props.dispatch(updateNewMessageCreator(body));
 	};
 	
 	/*каждый элемент мы преобразовываем в компоненту DialogItem с получеными данными*/
@@ -61,10 +72,10 @@ const Dialogs = (props) => {
 
 			    <div className={classes.massages}>
 			    	{dialogMasstges}	
-
+			    											
 
 				    <div>
-			          <textarea ref={newMassagElem}></textarea>
+			          <textarea onChange={onMessageChange} value={props.NewMessageBody}></textarea>
 			        </div>
 
           			<button onClick={ addMassag }>Add Massag</button>	    		

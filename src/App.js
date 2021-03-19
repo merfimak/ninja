@@ -13,18 +13,18 @@ import {
 
 
 const App = (props) => {
-  //console.log(props)
+  
   return (
   	<Router>
     <div className="app_wrepper">
 
-        <Header />
-        <NavBar />
-        <div className="app_wrepper_content">      
-        <Route path="/dialogs" render={ () => <Dialogs  dialogsData={props.state.massagesPage.dialogsData} massagesData={props.state.massagesPage.massagesData} /> } />
-        <Route path="/profile" render={ () => <Profile   postData={props.state.profilePage.postData} newPostText={props.state.profilePage.newPostText} addPost={props.addPost} updateVewPostText={props.updateVewPostText}/> } />
-        </div>
-          
+      <Header />
+      <NavBar />
+      <div className="app_wrepper_content">      
+      <Route path="/dialogs" render={ () => <Dialogs  dialogsData={props.state.massagesPage.dialogsData} NewMessageBody={props.state.massagesPage.NewMessageBody} massagesData={props.state.massagesPage.massagesData}  dispatch={props.dispatch}/> } />
+      <Route path="/profile" render={ () => <Profile   postData={props.state.profilePage.postData} newPostText={props.state.profilePage.newPostText} dispatch={props.dispatch}/> } />
+      </div>
+        
         
          
 

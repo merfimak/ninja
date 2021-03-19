@@ -1,6 +1,13 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
+import {updateNewPostActionCreator} from '../../../redux/state.js';
+import {addPostActionCreator} from '../../../redux/state.js';
+
+
+
+
+
 
 const MyPosts = (props) => {
 
@@ -8,18 +15,14 @@ const MyPosts = (props) => {
 
 let newPostElem = React.createRef();
 
-//console.log(props)
 let addPost = () =>{
-//let text = newPostElem.current.value;
- props.addPost();
-// newPostElem.current.value = '';
-// props.updateVewPostText('');
+ props.dispatch(addPostActionCreator());
 };
 
 let onPostChange = () => {
 let text = newPostElem.current.value;
-props.updateVewPostText(text);
-//console.log(text);
+props.dispatch(updateNewPostActionCreator(text));
+
 }
 //onChange - срабатывате при изменении
 
