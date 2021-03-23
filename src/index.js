@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-
+/*import {profileReducer} from './redux/profile_reducer.js';
+import {dialogReducer} from './redux/dialog_reduser.js';*/
 
 let rerenderEntireTree = () =>{
 	ReactDOM.render(

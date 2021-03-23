@@ -1,3 +1,8 @@
+import profileReducer from './prpofile_reducer.js'
+import dialogReducer from './dialog_reduser.js'
+
+
+
 //константы делаем что бы не ошибистя в строках
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
@@ -44,62 +49,61 @@ let store = {
 	},
 
 	dispatch(action){
-		if(action.type === "ADD_POST"){
-			let newPost = {
-				id: 3,
-				massage: this._state.profilePage.newPostText,
-				likesCount: 4
-			};
-			this._state.profilePage.postData.push(newPost);
-			this._state.profilePage.newPostText = '';
-			this._collSubscriber();
-		} else if(action.type === "UPDATE_NEW_POST_TEXT"){
-			this._state.profilePage.newPostText = action.newText;
-			this._collSubscriber();
-		}  else if(action.type === "UPDATE_NEW_MESSAGE_BODY"){
-			this._state.massagesPage.NewMessageBody = action.body;
-			this._collSubscriber();
-		}  else if(action.type === "SEND_MESSAGE"){
-			let body = this._state.massagesPage.NewMessageBody;
-			this._state.massagesPage.massagesData.push({id: 6, massage:body});
-			this._state.massagesPage.NewMessageBody = '';
-			this._collSubscriber();
-		}
+
+
+
+
+		
+
+this._state.profilePage = profileReducer(this._state.profilePage, action);	//Reducer возвращает нам state 	
+this._state.massagesPage = dialogReducer(this._state.massagesPage, action);		
+this._collSubscriber();
+
+
+
 	}
 
 }
 
 
-//action creator импортим его в MyPosts.js
-export const addPostActionCreator = () =>{
-  return{
-    type: ADD_POST,
-  }
-}
-//action creator импортим его в MyPosts.js
-export const updateNewPostActionCreator = (text) =>{
-  return{
-    type: UPDATE_NEW_POST_TEXT,
-    newText:text
-  }
-}
 
-//action creator импортим его в Dialogs.js
-export const sendMessageCreator = () =>{
-  return{
-    type: SEND_MESSAGE,
-  }
-}
-//action creator импортим его в Dialogs.js
-export const updateNewMessageCreator = (body) =>{
-  return{
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body:body
-  }
-}
+
+
 
 window.store = store;
 export default store;
+
+
+
+
+
+
+
+/*const profileReducer = (state, action) => {
+
+console.log(state.newPostText)
+console.log(action)
+
+
+if(action.type === "ADD_POST"){
+			let newPost = {
+				id: 3,
+				massage: state.newPostText,
+				likesCount: 4
+			};
+			state.postData.push(newPost);
+			state.newPostText = '';
+		} else if(action.type === "UPDATE_NEW_POST_TEXT"){
+			state.newPostText = action.newText;
+		}
+
+	return state;
+}*/
+
+
+
+
+
 
 
 /*let rerenderEntireTree = () => {
