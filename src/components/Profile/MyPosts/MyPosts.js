@@ -1,8 +1,6 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
-import {updateNewPostActionCreator} from '../../../redux/prpofile_reducer.js';
-import {addPostActionCreator} from '../../../redux/prpofile_reducer.js';
 
 
 
@@ -12,21 +10,21 @@ import {addPostActionCreator} from '../../../redux/prpofile_reducer.js';
 const MyPosts = (props) => {
 
 
-
+console.log(props)
 let newPostElem = React.createRef();
 
 let addPost = () =>{
- props.dispatch(addPostActionCreator());
+ props.onAddPost();
 };
 
-let onPostChange = () => {
+let updateNewPost = () => {
 let text = newPostElem.current.value;
-props.dispatch(updateNewPostActionCreator(text));
+props.onPostChange(text);
 
 }
 //onChange - срабатывате при изменении
 
-let postsElements = props.postData.map( elem => <Post massage={elem.massage} like={elem.likesCount}/>)
+let postsElements = props.profilePage.postData.map( elem => <Post massage={elem.massage} like={elem.likesCount}/>)
 
   return (
   
@@ -36,7 +34,7 @@ let postsElements = props.postData.map( elem => <Post massage={elem.massage} lik
         <div className={classes.new_post}>
 
           <div>
-          <textarea onChange={onPostChange} ref={newPostElem} value={props.newPostText}/>
+          <textarea onChange={updateNewPost} ref={newPostElem} value={props.profilePage.newPostText}/>
           </div>
 
           <button onClick={ addPost }>Add post</button>

@@ -3,7 +3,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import NavBar from './components/NavBar/NavBar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
+import UsersContainer from './components/Users/UsersContainer';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,8 +22,9 @@ const App = (props) => {
       <Header />
       <NavBar />
       <div className="app_wrepper_content">      
-      <Route path="/dialogs" render={ () => <Dialogs  dialogsData={props.state.massagesPage.dialogsData} NewMessageBody={props.state.massagesPage.NewMessageBody} massagesData={props.state.massagesPage.massagesData}  dispatch={props.dispatch}/> } />
-      <Route path="/profile" render={ () => <Profile   postData={props.state.profilePage.postData} newPostText={props.state.profilePage.newPostText} dispatch={props.dispatch}/> } />
+      <Route path="/dialogs" render={ () => <DialogsContainer /> } />
+      <Route path="/profile" render={ () => <Profile /> } />
+      <Route path="/users" render={ () => <UsersContainer /> } />
       </div>
         
         

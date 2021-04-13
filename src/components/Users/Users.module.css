@@ -1,0 +1,23 @@
+.users{
+	background-color: yellow;
+	margin: 10px;
+}
+
+.user{
+	background-color: yellowgreen;
+	max-width: 400px;
+	border-bottom: 1px solid red;
+	margin: 10px;
+}
+
+.followe_button{
+margin: 10px;
+}
+
+.user_img{
+	max-width: 100px;
+}
+
+.user_img img{
+	width: 100%;
+}

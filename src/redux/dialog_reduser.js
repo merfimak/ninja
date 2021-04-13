@@ -2,21 +2,50 @@
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
-const dialogReducer = (state, action) => {
+let initialState = {
+      massagesData: [
+        {id: 1, massage:"hi"},
+        {id: 2, massage:"hui"},
+        {id: 3, massage:"hoi"},
+        {id: 3, massage:"hei"},
+      ],
+      dialogsData: [
+        {id: 1, name:"Pasha"},
+        {id: 2, name:"Dima"},
+        {id: 3, name:"Vova"},
+        {id: 4, name:"Sasha"}
+      ],
+      NewMessageBody:'',
+}
 
+
+
+
+const dialogReducer = (state = initialState, action) => {
+//урок 47 12 мин, обьяснение. делаем копию обьекта с помощью ...
 
 
 switch (action.type) {
+
   case UPDATE_NEW_MESSAGE_BODY:
-  state.NewMessageBody = action.body;
-  return state;
+     return {...state,//делаем глубинную копию
+                 NewMessageBody: action.body
+     };
     break;
+
+
+
   case SEND_MESSAGE:
-   let body = state.NewMessageBody;
-			state.massagesData.push({id: 6, massage:body});
-			state.NewMessageBody = '';
-			return state;
+  let body = state.NewMessageBody;
+  return {...state,//делаем глубинную копию
+                 NewMessageBody: '',
+                massagesData: [...state.massagesData, {id: 6, massage:body}],//по старому тут так писалось stateCopy.massagesData.push({id: 6, massage:body});
+                
+  }
     break;
+
+
+
   default:
    return state;
 }

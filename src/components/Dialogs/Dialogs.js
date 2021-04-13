@@ -32,41 +32,42 @@ const Massage = (props) =>{
 
 const Dialogs = (props) => {
 	
+//console.log(props)
 
-	
 	let addMassag = () =>{
-		//let text = newMassagElem.current.value;
-		 props.dispatch(sendMessageCreator());
+		 props.onAddMassag();
 	};
 
 
 
 
 
-	let onMessageChange = (event) =>{
+	let MessageChange = (event) =>{
 		let body = event.target.value;
-		 props.dispatch(updateNewMessageCreator(body));
+		 props.onMessageChange(body);
 	};
+
 	
-	/*каждый элемент мы преобразовываем в компоненту DialogItem с получеными данными*/
-	let dialogElement = props.dialogsData.map( (elem) => {
+	
+	//каждый элемент мы преобразовываем в компоненту DialogItem с получеными данными
+	let dialogElement = props.massagesPage.dialogsData.map( (elem) => {
 		return [
-			<DialogItem name={elem.name} id={elem.id} />
+			<DialogItem name={elem.name} id={elem.id} key={elem.id}/>
 		]
 	});
 	
 
 	/*каждый элемент мы преобразовываем в компоненту Massage с получеными данными*/
-	let dialogMasstges = props.massagesData.map( (elem) => {
+	let dialogMasstges = props.massagesPage.massagesData.map( (elem) => {
 		return [
-			<Massage massage={elem.massage}/>
+			<Massage massage={elem.massage} key={elem.id}/>
 		]
 	});
 
 	  return (
 			<div className={classes.dialogs}>
 
-		    	<div className={classes.dialogs_items}>		
+					<div className={classes.dialogs_items}>		
 					{dialogElement}	    	
 		  		</div>
 
@@ -75,12 +76,11 @@ const Dialogs = (props) => {
 			    											
 
 				    <div>
-			          <textarea onChange={onMessageChange} value={props.NewMessageBody}></textarea>
+			          <textarea onChange={MessageChange} value={props.massagesPage.NewMessageBody}></textarea>
 			        </div>
 
           			<button onClick={ addMassag }>Add Massag</button>	    		
 			    </div>
-
 	   	  	</div>
 	   )
 }
