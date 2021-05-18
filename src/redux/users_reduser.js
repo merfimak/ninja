@@ -2,9 +2,18 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const TOTAL_COUNT = 'TOTAL_COUNT';
+const   TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const   TOGGLE_IS_FOLOWING_PROGRESS = 'TOGGLE_IS_FOLOWING_PROGRESS';
 
 let initialState = {
-      users: []
+      users: [],
+      pageSize: 5,
+      totalUsersCounter: 0,
+      currentPage: 1,
+      isFetching: false,
+      followingInProgress: []
 }
 
 
@@ -26,7 +35,6 @@ switch (action.type) {
           })
        };
       break;
-
        case UNFOLLOW:
         return {
         ...state,//делаем копию state
@@ -38,14 +46,37 @@ switch (action.type) {
           })
        };
       break;
-
        case SET_USERS:
         return {
         ...state,
-            users: [...state.users, ...action.users]//засовываем в users масив из state(делаем копию глубинную) и зсовываем тудаже юзеров из action
+            users: [...action.users]//засовываем в users масив из state(делаем копию глубинную) и зсовываем тудаже юзеров из action
        };
       break;
-
+      case SET_CURRENT_PAGE:
+        return {
+        ...state,
+            currentPage: action.currentPage
+       };
+      break;
+       case TOTAL_COUNT:
+        return {
+        ...state,
+            totalUsersCounter: action.totalCount
+       };
+      break;
+       case TOGGLE_IS_FETCHING:
+        return {
+        ...state,
+            isFetching: action.isFetching
+       };
+        case TOGGLE_IS_FOLOWING_PROGRESS:
+        return {
+        ...state,
+            followingInProgress: action.isFetching
+             ? [...state.followingInProgress, action.userId]
+             : state.followingInProgress.filter(id=>id != action.userId)
+       };
+      break;
       default:
        return state;
     }
@@ -56,7 +87,7 @@ switch (action.type) {
 
 
 //action creator импортим его в Users.js
-export const followActionCreator = (userID) =>{
+export const follow = (userID) =>{
   return{
     type: FOLLOW,
     userID
@@ -64,18 +95,48 @@ export const followActionCreator = (userID) =>{
 }
 
 //action creator импортим его в Users.js
-export const unFollowActionCreator = (userID) =>{
+export const unFollow = (userID) =>{
   return{
     type: UNFOLLOW,
     userID
   }
 }
 
-export const setUsersActionCreator = (users) =>{
+export const setUsers = (users) =>{
   return{
     type: SET_USERS,
     users
   }
 }
+
+export const setCurrentPage = (currentPage) =>{
+  return{
+    type: SET_CURRENT_PAGE,
+    currentPage
+  }
+}
+
+export const setTotalUsersCount = (totalCount) =>{
+  return{
+    type: TOTAL_COUNT,
+    totalCount
+  }
+}
+
+export const toggleFeching = (isFetching) =>{
+  return{
+    type: TOGGLE_IS_FETCHING,
+    isFetching
+  }
+}
+
+export const toggleFollowingInProgress = (isFetching, userId) =>{
+  return{
+    type: TOGGLE_IS_FOLOWING_PROGRESS,
+    isFetching,
+    userId
+  }
+}
+
 
 export default usersReduser;

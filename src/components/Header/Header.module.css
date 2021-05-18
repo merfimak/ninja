@@ -1,6 +1,8 @@
 .header{
   background-color: red;
  grid-area: h;
+ display: flex;
+ justify-content: space-between;
 }
 
 .logo{
@@ -11,4 +13,16 @@
 
 .logo img{
    max-width: 100%;
+}
+
+
+.login_block{
+	background-color: pink;
+	width: 90px;
+	height: 40px;
+	margin: 10px 30px 10px 0;
+	text-align: center;
+	padding: 10px;
+	text-transform: uppercase;
+	color: green;
 }

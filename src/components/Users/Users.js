@@ -1,53 +1,92 @@
 import React from 'react';
 import classes from './Users.module.css';
 import * as axios from 'axios';//в axios есть куча всего, * значит что все что есть в axios мы запиздячили в наш axios и теперь через него у нас есть доступ ко всему что там есть.
+import { NavLink} from 'react-router-dom';
+import {usersAPI} from '../../api/api.js';
 
 
 let Users = (props) => {
 //let usersElements = props.users.map( elem => <div>{elem.fullName}</div>)
-//console.log(props.users)
 
+console.log(props)
+let pagesCount = Math.ceil(props.totalUsersCounter / props.pageSize);
 
-let getUsers = () =>{
-if(props.users.length === 0){
-axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response =>{
-	//console.log(response.data.items)
-	props.setUsers(response.data.items);
-})
+let pages = [];
+for(let i = 1; i<=pagesCount;i++){
+	pages.push(i);
 }
-}
-/*props.setUsers([
-		{id: 1, fotoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-G4qIeWgW1fzg1S8HoZ690i1c1iTnQ7wb0w&usqp=CAU', followed: false, fullName:"Kaligula", status: "I am a zar", location: {city: "Rome", country: "Italia"}},
-        {id: 2, fotoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-G4qIeWgW1fzg1S8HoZ690i1c1iTnQ7wb0w&usqp=CAU', followed: true, fullName:"Ioan", status: "I am a zar too", location: {city: "Moscow", country: "Russ"}},
-        {id: 3, fotoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-G4qIeWgW1fzg1S8HoZ690i1c1iTnQ7wb0w&usqp=CAU', followed: false, fullName:"Vova", status: "I am a loh", location: {city: "Kiev", country: "Ukrain"}},
-		])*/
-
 	return(
+		<div>
+
+
+<div className={classes.user_pagination}>
+
+	{
+		pages.map(elem =>{
+		return <span  onClick={() => {props.onPagaChanged(elem)}} key={elem.id} className={props.currentPage === elem ? classes.select_page : ""}>{elem}</span>
+	}
+	)}
+</div>
+
+
+
+
+	<button>get Users</button>
 	 <div  className={classes.users}>{
 	 	
 	 	props.users.map( elem =>
 
 	 	 <div key={elem.id} className={classes.user}>
 
-	 
+
 	 		<div>{elem.name}</div>
-	 		<div className={classes.user_img}><img src={elem.photos.small =! null ? "/img/ava.jpg" : elem.photos.small} /></div>
+
+	 		 <NavLink to={'/profile/' + elem.id}>
+	 		<div className={classes.user_img}><img src={elem.photos.small === null ? "/img/ava.jpg" : elem.photos.small} /></div>
+	 		</NavLink>
+
+	 		<div>{elem.id}</div>
 	 		<div>{elem.status}</div>
 	 		<div>тут должен быть город</div>
 	 		<div className={classes.followe_button}>
 
 	 			{elem.followed
-	 			 ? <button onClick={() => {props.unFollow(elem.id)}}>Unfollowe</button>
-	 			  : <button onClick={() => {props.follow(elem.id)}}>followe</button>}
+	 			 ? <button disabled={props.followingInProgress.some(id=>id===elem.id)} onClick={() => {
+	 			 	props.toggleFollowingInProgress(true,elem.id)
+	 			 	 usersAPI.unFollow(elem.id).then(data =>{
+					    	if(data.resultCode === 0){
+					  			props.unFollow(elem.id)
+					  		}
+					    props.toggleFollowingInProgress(false,elem.id)	
+						})
+
+	 			 	}}>Unfollowe</button>
+
+
+	 			  : <button disabled={props.followingInProgress.some(id=>id===elem.id)} onClick={() => {
+
+	 			  	props.toggleFollowingInProgress(true,elem.id)
+	 			    usersAPI.follow(elem.id).then(data =>{
+					    	if(data.resultCode === 0){
+					  			props.follow(elem.id)
+					  		}
+					    	
+						})
+	 			    props.toggleFollowingInProgress(false,elem.id)
+
+	 			  }}>followe</button>}
 	
 	 		</div>
+	
 
 
 	 	</div>)
 	 }
 	 
-		<button onClick={getUsers}>get Users</button>	
+			
 	 </div>
+	 </div>
+	
 	 )
 }
 export default Users;

@@ -10,7 +10,7 @@ import Post from './Post/Post';
 const MyPosts = (props) => {
 
 
-console.log(props)
+//console.log(props)
 let newPostElem = React.createRef();
 
 let addPost = () =>{

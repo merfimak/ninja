@@ -13,12 +13,11 @@ import { Provider } from 'react-redux';
 
 
 	ReactDOM.render(
-		  <React.StrictMode>
 		  	<Provider store={store}>{/*штука из react-redux, позволяет добратьсядо store из контейнеров компонент*/}
+		  
 		    	<App  />
 		  	
-		    </Provider>
-		  </React.StrictMode>,
+		    </Provider>,
 		  document.getElementById('root')
 	);
 

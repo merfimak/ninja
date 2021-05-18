@@ -21,3 +21,10 @@ margin: 10px;
 .user_img img{
 	width: 100%;
 }
+.user_pagination{
+	background-color: yellowgreen;
+}
+.select_page{
+	font-weight: 700;
+	background-color: yellow;
+}
