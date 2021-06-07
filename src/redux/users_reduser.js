@@ -1,3 +1,5 @@
+import {usersAPI} from '../api/api.js';
+
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -87,7 +89,7 @@ switch (action.type) {
 
 
 //action creator импортим его в Users.js
-export const follow = (userID) =>{
+export const followSuccess = (userID) =>{
   return{
     type: FOLLOW,
     userID
@@ -95,7 +97,7 @@ export const follow = (userID) =>{
 }
 
 //action creator импортим его в Users.js
-export const unFollow = (userID) =>{
+export const unFollowSuccess = (userID) =>{
   return{
     type: UNFOLLOW,
     userID
@@ -135,6 +137,51 @@ export const toggleFollowingInProgress = (isFetching, userId) =>{
     type: TOGGLE_IS_FOLOWING_PROGRESS,
     isFetching,
     userId
+  }
+}
+
+
+//это санка
+export const getUsers = (currentPage,pageSize) =>{
+
+  return (dispatch) =>{
+    dispatch(toggleFeching(true));
+         usersAPI.getUsers(currentPage, pageSize).then(data =>{
+            dispatch(toggleFeching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount));
+        })
+  }
+}
+
+
+
+//это санка
+export const follow = (userId) =>{
+
+  return (dispatch) =>{
+    dispatch(toggleFollowingInProgress(true, userId))
+           usersAPI.follow(userId).then(data =>{
+                if(data.resultCode === 0){
+                  dispatch(followSuccess(userId))
+                }
+              dispatch(toggleFollowingInProgress(false,userId))
+            })
+  }
+}
+
+
+//это санка
+export const unfollow = (userId) =>{
+
+  return (dispatch) =>{
+    dispatch(toggleFollowingInProgress(true, userId))
+           usersAPI.unFollow(userId).then(data =>{
+                if(data.resultCode === 0){
+                  dispatch(unFollowSuccess(userId))
+                }
+              dispatch(toggleFollowingInProgress(false,userId))
+            })
   }
 }
 

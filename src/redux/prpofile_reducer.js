@@ -1,7 +1,10 @@
+import {usersAPI} from '../api/api.js';
+import {profileAPI} from '../api/api.js';
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 let initialState = {
   postData: [
@@ -9,7 +12,8 @@ let initialState = {
         {id: 2, massage:"kolj ebanashka", likesCount: 3},
       ],
       newPostText: "newPostText---perdole",
-      profile: null
+      profile: null,
+      status: ""
 
 }
 
@@ -50,6 +54,14 @@ switch (action.type) {
         }
   }
 
+     case SET_STATUS:{
+   // console.log(state);
+        return {//делаем глубинную копию
+          ...state,
+          status:action.status
+        }
+  }
+
 
 
   default:
@@ -83,6 +95,42 @@ export const setUsersProfile = (profile) =>{
   return{
     type: SET_USER_PROFILE,
     profile:profile
+  }
+}
+
+export const setStatus = (status) =>{
+  return{
+    type: SET_STATUS,
+    status:status
+  }
+}
+//это санка
+export const getUsersProfile = (userId) =>{
+  return(dispatch) =>{
+   usersAPI.getProfile(userId).then(response =>{
+          dispatch(setUsersProfile(response.data));
+      })
+  }
+}
+
+//это санка
+export const getStatus = (userId) =>{
+  return(dispatch) =>{
+   profileAPI.getStatus(userId).then(response =>{
+          dispatch(setStatus(response.data));
+      })
+  }
+}
+
+//это санка
+export const updateStatus = (status) =>{
+  return(dispatch) =>{
+   profileAPI.updateStatus(status).then(response =>{
+    if(response.data.resultCode === 0 ){
+      dispatch(setStatus(status));
+    }
+          
+      })
   }
 }
 

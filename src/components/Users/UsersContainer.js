@@ -1,12 +1,13 @@
 import React from 'react';
-
+import { compose } from 'redux';
 import {follow,
-	unFollow,
+	unfollow,
 	setUsers,
 	setCurrentPage,
 	setTotalUsersCount,
 	toggleFeching,
-	toggleFollowingInProgress
+	toggleFollowingInProgress,
+	getUsers
 } from '../../redux/users_reduser.js';
 /*
 import {followActionCreator} from '../../redux/users_reduser.js';
@@ -29,28 +30,20 @@ class UsersAPIcomponent extends React.Component {
 	  
 		//сработает когда дом будет построен
 		componentDidMount() {
-			this.props.toggleFeching(true);
-			 usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data =>{
-		    	this.props.toggleFeching(false);
-			this.props.setUsers(data.items);
-			this.props.setTotalUsersCount(data.totalCount);
-			})
+			//здесь раньше был аякс запрос но мы вынесли его в usersReduser
+			this.props.getUsers(this.props.currentPage,this.props.pageSize)
 
 		  }
 		onPagaChanged = (pageNumber) => {
-				this.props.toggleFeching(true);
-			this.props.setCurrentPage(pageNumber)
-			 usersAPI.getUsers(pageNumber, this.props.pageSize).then(data =>{
-		    this.props.toggleFeching(false);
-			this.props.setUsers(data.items);
-			})
+				this.props.getUsers(pageNumber,this.props.pageSize)
+			
 		}
 		render(){
 		return( 
 				<div>
 				<Prelouder isFetching={this.props.isFetching} />
 				<Users users={this.props.users}
-						unFollow={this.props.unFollow}
+						unfollow={this.props.unfollow}
 						follow={this.props.follow}
 						onPagaChanged={this.onPagaChanged}
 						currentPage={this.props.currentPage}
@@ -77,6 +70,7 @@ let mapStateToProps = (state) =>{
 		currentPage: state.usersPage.currentPage,
 		isFetching: state.usersPage.isFetching,
 		followingInProgress: state.usersPage.followingInProgress,
+		getUsers: state.usersPage.getUsers,
 
 	}
 }
@@ -112,14 +106,26 @@ let mapStateToProps = (state) =>{
 // но сам state не изменяеться потому что мы менять его неможем, мы делаем копию, и он следит когда появится новая копия и тогда уже перерисовывается
 //const UsersContainer = connect(mapStateToProps,mapDispatchToProps)(UsersAPIcomponent);cтарая запись
 //connect внутри себя создает ActionCreator, и поэтому можно писать вот так вот сокращенно
-const UsersContainer = connect(mapStateToProps,{
+/*const UsersContainer = connect(mapStateToProps,{
 	follow,
-	unFollow,
-	setUsers,
+	unfollow,
 	setCurrentPage,
-	setTotalUsersCount,
-	toggleFeching,
-	toggleFollowingInProgress
-})(UsersAPIcomponent);//UsersAPIcomponent находиться в этом же файле
+	toggleFollowingInProgress,
+	getUsers
+})(UsersAPIcomponent);*///UsersAPIcomponent находиться в этом же файле
 
-export default UsersContainer;
+
+export default compose(
+	connect(mapStateToProps,{
+	follow,
+	unfollow,
+	setCurrentPage,
+	toggleFollowingInProgress,
+	getUsers
+}),//добавляет инфу Props в из State
+	)(UsersAPIcomponent);
+
+
+
+
+//export default UsersContainer;

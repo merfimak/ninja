@@ -3,8 +3,8 @@ import  classes from './Header.module.css';
 import { NavLink} from 'react-router-dom';
 import Header from './Header';
 import { connect } from 'react-redux';
-import * as axios from 'axios';
-import {setAuthUserDataCreator}  from '../../redux/auth_reducer.js';
+import {authAPI} from '../../api/api.js';
+import {getAuthUserData} from '../../redux/auth_reducer.js';
 
 class HeaderContainer extends React.Component {
 	constructor(props) {
@@ -13,12 +13,7 @@ class HeaderContainer extends React.Component {
 
 		componentDidMount() {
 		
-			 axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{withCredentials: true})
-		    .then(response =>{
-		  		if(response.data.resultCode === 0){
-		  			this.props.setAuthUserDataCreator(response.data.data)
-		  		}
-			})
+			this.props.getAuthUserData()
 
 		  }
 
@@ -46,4 +41,4 @@ let mapStateToProps = (state) =>{
 
 
 
-export default connect(mapStateToProps,{setAuthUserDataCreator})(HeaderContainer);
+export default connect(mapStateToProps,{getAuthUserData})(HeaderContainer);

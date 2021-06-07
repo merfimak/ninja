@@ -8,7 +8,7 @@ import {usersAPI} from '../../api/api.js';
 let Users = (props) => {
 //let usersElements = props.users.map( elem => <div>{elem.fullName}</div>)
 
-console.log(props)
+///console.log(props)
 let pagesCount = Math.ceil(props.totalUsersCounter / props.pageSize);
 
 let pages = [];
@@ -23,7 +23,9 @@ for(let i = 1; i<=pagesCount;i++){
 
 	{
 		pages.map(elem =>{
-		return <span  onClick={() => {props.onPagaChanged(elem)}} key={elem.id} className={props.currentPage === elem ? classes.select_page : ""}>{elem}</span>
+		return <div className={classes.pagination_number}>
+			<span  onClick={() => {props.onPagaChanged(elem)}} key={elem.id} className={props.currentPage === elem ? classes.select_page : ""}>{elem}</span>,
+		</div>
 	}
 	)}
 </div>
@@ -52,27 +54,15 @@ for(let i = 1; i<=pagesCount;i++){
 
 	 			{elem.followed
 	 			 ? <button disabled={props.followingInProgress.some(id=>id===elem.id)} onClick={() => {
-	 			 	props.toggleFollowingInProgress(true,elem.id)
-	 			 	 usersAPI.unFollow(elem.id).then(data =>{
-					    	if(data.resultCode === 0){
-					  			props.unFollow(elem.id)
-					  		}
-					    props.toggleFollowingInProgress(false,elem.id)	
-						})
+	 			 	props.unfollow(elem.id)
+	 			 	 
 
 	 			 	}}>Unfollowe</button>
 
 
 	 			  : <button disabled={props.followingInProgress.some(id=>id===elem.id)} onClick={() => {
 
-	 			  	props.toggleFollowingInProgress(true,elem.id)
-	 			    usersAPI.follow(elem.id).then(data =>{
-					    	if(data.resultCode === 0){
-					  			props.follow(elem.id)
-					  		}
-					    	
-						})
-	 			    props.toggleFollowingInProgress(false,elem.id)
+	 			  	props.follow(elem.id)
 
 	 			  }}>followe</button>}
 	

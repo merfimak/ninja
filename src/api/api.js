@@ -15,33 +15,50 @@ const instance = axios.create({
 
 export const usersAPI = {
 	getUsers(currentPage = 1, pageSize = 10){
-	return  instance.get(`users?page=${currentPage}&count=${pageSize}`)
-	.then(response => {
-		return response.data;
-	});
-},
-
-	unFollow(id){
-	console.log(id)
-	return  instance.delete('follow/'+id)
-	.then(response => {
-
-		return response.data;
+		return  instance.get(`users?page=${currentPage}&count=${pageSize}`)
+		.then(response => {
+			return response.data;
 		});
 	},
+	unFollow(id){
+	console.log(id)
+		return  instance.delete('follow/'+id)
+		.then(response => {
 
+			return response.data;
+			});
+	},
 	follow(id){
-	return  instance.post('follow/'+id)
-	.then(response => {
+		return  instance.post('follow/'+id)
+		.then(response => {
 
-		return response.data;
-	});
-
-
-
+			return response.data;
+		});
+	},
+	getProfile(userId){
+		console.warn('Obsolete method. Please profileAPI object.')
+		return profileAPI.getProfile(userId)//get возвращат промис
+	}
 }
 
+export const profileAPI = {
+	getProfile(userId){
+		return instance.get(`profile/`+userId)//get возвращат промис
+	},
+	getStatus(userId){
+		return instance.get(`profile/status/`+userId)//
+	},
+	updateStatus(status){
+		return instance.put(`profile/status/`, {status: status})//
+	}
 }
 
 
+//эта штука для header вверху показывается имя если я авторизован
+export const authAPI = {
+	me(){
+	return	instance.get(`auth/me`)
+	}
+
+}
 

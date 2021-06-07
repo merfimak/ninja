@@ -23,8 +23,16 @@ margin: 10px;
 }
 .user_pagination{
 	background-color: yellowgreen;
+	display: flex;
+	max-width: 1200px;
+	overflow: scroll;
+	padding: 10px;
 }
 .select_page{
 	font-weight: 700;
 	background-color: yellow;
+}
+
+.pagination_number{
+margin: 0 5px;
 }

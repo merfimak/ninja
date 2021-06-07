@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './Dialogs.module.css';
-import { NavLink} from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import {sendMessageCreator} from '../../redux/dialog_reduser.js';
 import {updateNewMessageCreator} from '../../redux/dialog_reduser.js';
 
@@ -63,6 +63,8 @@ const Dialogs = (props) => {
 			<Massage massage={elem.massage} key={elem.id}/>
 		]
 	});
+
+if(!props.isAuth) return <Redirect to={"/Login"} />
 
 	  return (
 			<div className={classes.dialogs}>

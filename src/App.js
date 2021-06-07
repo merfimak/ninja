@@ -5,6 +5,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import HeaderContainer from './components/Header/header_container';
+import Login from './components/Login/Login';
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +26,7 @@ const App = (props) => {
       <Route path="/dialogs" render={ () => <DialogsContainer /> } />
       <Route path="/profile/:userId?" render={ () => <ProfileContainer /> } />
       <Route path="/users" render={ () => <UsersContainer /> } />
+      <Route path="/login" render={ () => <Login /> } />
       </div>
         
         
