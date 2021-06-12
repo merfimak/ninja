@@ -1,6 +1,7 @@
 import {authAPI} from '../api/api.js';
 
 const SET_USER_DATA = 'SET_USER_DATA';
+const SET_ERROR_TO_LOGIN_FORM = 'SET_ERROR_TO_LOGIN_FORM';
 
 let initialState = {
       id: null,
@@ -17,7 +18,14 @@ switch (action.type) {
 				return {//делаем глубинную копию
           ...state,
          ...action.data,
-          isAuth: true
+          isAuth: action.isAuth
+        }
+  }
+
+    case SET_ERROR_TO_LOGIN_FORM:{
+        return {//делаем глубинную копию
+          ...state,
+          error: action.error
         }
   }
   default:
@@ -28,10 +36,19 @@ switch (action.type) {
 
 
 
-export const setAuthUserDataCreator = (data) =>{
+export const setAuthUserDataCreator = (data, isAuth) =>{
   return{
     type: SET_USER_DATA,
-    data: data
+    data: data,
+    isAuth: isAuth
+  }
+}
+
+
+export const setErrorToLoginForm = (error) =>{
+  return{
+    type: SET_ERROR_TO_LOGIN_FORM,
+    error: error
   }
 }
 
@@ -39,17 +56,43 @@ export const setAuthUserDataCreator = (data) =>{
 export const getAuthUserData = () =>{
 
   return(dispatch) =>{
-     authAPI.me().then(response =>{
+  return authAPI.me().then(response =>{////80 ur 20 min dispatch может возвращать промисы
       console.log(response.data.data)
             if(response.data.resultCode === 0){
-              dispatch(setAuthUserDataCreator(response.data.data))
+              dispatch(setAuthUserDataCreator(response.data.data, true))
             }
         })
    }
 }
 
 
+//это санка
+export const login = (email, password, rememberMe) =>{
 
+  return(dispatch) =>{
+     authAPI.login(email, password, rememberMe).then(response =>{
+      //console.log(response.data.resultCode)
+            if(response.data.resultCode === 0){
+              dispatch(getAuthUserData())
+            }else{
+              console.log(response.data.messages)
+             dispatch(setErrorToLoginForm(response.data.messages))//response.data.messages[0]
+            }
+        })
+   }
+}
+
+//это санка
+export const logout = () =>{
+
+  return(dispatch) =>{
+     authAPI.logout().then(response =>{
+            if(response.data.resultCode === 0){
+              dispatch(setAuthUserDataCreator({}, false))
+            }
+        })
+   }
+}
 
 
 export default authReducer;

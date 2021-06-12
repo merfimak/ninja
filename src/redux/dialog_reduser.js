@@ -36,7 +36,7 @@ switch (action.type) {
 
 
   case SEND_MESSAGE:
-  let body = state.NewMessageBody;
+  let body = action.massage;
   return {...state,//делаем глубинную копию
                  NewMessageBody: '',
                 massagesData: [...state.massagesData, {id: 6, massage:body}],//по старому тут так писалось stateCopy.massagesData.push({id: 6, massage:body});
@@ -59,9 +59,11 @@ switch (action.type) {
 
 
 //action creator импортим его в Dialogs.js
-export const sendMessageCreator = () =>{
+export const sendMessageCreator = (massage) =>{
+  //console.log(massage)
   return{
     type: SEND_MESSAGE,
+    massage: massage
   }
 }
 //action creator импортим его в Dialogs.js

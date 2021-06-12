@@ -9,6 +9,13 @@ import {follow,
 	toggleFollowingInProgress,
 	getUsers
 } from '../../redux/users_reduser.js';
+import {getUsersSelector,
+		getPageSize,
+		gettotalUsersCounter,
+		getcurrentPage,
+		getisFetching,
+		getfollowingInProgress,
+} from '../../redux/users_selectors.js';
 /*
 import {followActionCreator} from '../../redux/users_reduser.js';
 import {unFollowActionCreator} from '../../redux/users_reduser.js';
@@ -36,7 +43,6 @@ class UsersAPIcomponent extends React.Component {
 		  }
 		onPagaChanged = (pageNumber) => {
 				this.props.getUsers(pageNumber,this.props.pageSize)
-			
 		}
 		render(){
 		return( 
@@ -62,7 +68,7 @@ class UsersAPIcomponent extends React.Component {
 
 //оберточная компонента которая работает с стором
 // эта функция передает свойства
-let mapStateToProps = (state) =>{
+/*let mapStateToProps = (state) =>{
 	return{
 		users: state.usersPage.users,
 		pageSize: state.usersPage.pageSize,
@@ -71,6 +77,18 @@ let mapStateToProps = (state) =>{
 		isFetching: state.usersPage.isFetching,
 		followingInProgress: state.usersPage.followingInProgress,
 		getUsers: state.usersPage.getUsers,
+
+	}
+}*/
+
+let mapStateToProps = (state) =>{
+	return{
+		users: getUsersSelector(state),
+		pageSize: getPageSize(state),
+		totalUsersCounter: gettotalUsersCounter(state),
+		currentPage: getcurrentPage(state),
+		isFetching: getisFetching(state),
+		followingInProgress: getfollowingInProgress(state),
 
 	}
 }

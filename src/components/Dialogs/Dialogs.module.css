@@ -48,3 +48,31 @@ border-bottom: 1px solid gold;
 	height: 100%;
 	border-radius: 50%;
 }
+
+
+
+
+
+.massage_input{
+	margin: 0 0 20px 0;
+	width: 250px;
+	padding: 10px;
+	margin: 10px 0;
+}
+
+.massage_button{
+	margin: 20px 0 20px 0;
+	width: 100px;
+	height: 30px;
+	color: #fff;
+	background-color: red;
+	border-radius: 5px;
+}
+
+.massage_error{
+	color: red;
+}
+
+
+
+

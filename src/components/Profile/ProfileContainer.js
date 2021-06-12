@@ -20,8 +20,12 @@ class ProfileAPIContainer extends React.Component {
 		componentDidMount() {
 			let userId = this.props.match.params.userId;
 			if(!userId){
-				userId = 2;
+				userId = this.props.my_id;
+				if(!userId){
+					this.props.history.push("/users")
+				}
 			}
+
        		this.props.getUsersProfile(userId);//это санка
        		this.props.getStatus(userId);//это санка
 
@@ -60,12 +64,13 @@ AuthRedirectComponent = connect(mapStateToPropsForRedirect)(AuthRedirectComponen
 let mapStateToProps = (state) =>({
 	profile: state.profilePage.profile,
 	status: state.profilePage.status,
+	my_id: state.auth.id,
 });
 
 export default compose(
 	connect(mapStateToProps,{getUsersProfile,getStatus,updateStatus}),//добавляет инфу Props в из State
 	withRouter,//Компонент высшего порядка,withRouter как и connect вернет компоненту но уже с добавлениями данных из url
-	withAuthRedirect//проверка на авторизацию
+	//withAuthRedirect//проверка на авторизацию
 	)(ProfileAPIContainer);
 
 //export default connect(mapStateToProps,{getUsersProfile})(withUrlDataProfileAPIContainer);

@@ -40,7 +40,7 @@ onStatusChange = (e) => {
 
 
 }
-//сработает когда компонента перерисуется
+//сработает когда либо пропсы изменяться либо локальный стейт измениться
 componentDidUpdate(prevProps, prevState){
 	if(prevProps.status !== this.props.status){
 		this.setState({

@@ -33,7 +33,7 @@ for(let i = 1; i<=pagesCount;i++){
 
 
 
-	<button>get Users</button>
+	<button className={classes.get_users_btn}>get Users</button>
 	 <div  className={classes.users}>{
 	 	
 	 	props.users.map( elem =>
@@ -41,26 +41,25 @@ for(let i = 1; i<=pagesCount;i++){
 	 	 <div key={elem.id} className={classes.user}>
 
 
-	 		<div>{elem.name}</div>
+	 		<div className={classes.user_name}>{elem.name}</div>
 
 	 		 <NavLink to={'/profile/' + elem.id}>
 	 		<div className={classes.user_img}><img src={elem.photos.small === null ? "/img/ava.jpg" : elem.photos.small} /></div>
 	 		</NavLink>
 
-	 		<div>{elem.id}</div>
+	 		<div className={classes.user_id}>id - {elem.id}</div>
 	 		<div>{elem.status}</div>
-	 		<div>тут должен быть город</div>
 	 		<div className={classes.followe_button}>
 
 	 			{elem.followed
-	 			 ? <button disabled={props.followingInProgress.some(id=>id===elem.id)} onClick={() => {
+	 			 ? <button className={classes.followe_btn} disabled={props.followingInProgress.some(id=>id===elem.id)} onClick={() => {
 	 			 	props.unfollow(elem.id)
 	 			 	 
 
 	 			 	}}>Unfollowe</button>
 
 
-	 			  : <button disabled={props.followingInProgress.some(id=>id===elem.id)} onClick={() => {
+	 			  : <button className={classes.followe_btn} disabled={props.followingInProgress.some(id=>id===elem.id)} onClick={() => {
 
 	 			  	props.follow(elem.id)
 

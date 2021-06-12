@@ -1,5 +1,7 @@
 //import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import NavBar from './components/NavBar/NavBar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
@@ -12,10 +14,35 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { connect } from 'react-redux';
+import { getAuthUserData } from './redux/auth_reducer.js';
+import { compose } from 'redux';
+import { initializeApp } from './redux/app_reducer.js';
+import prelouder from './assets/images/prelouder.gif';
+
+class App extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+
+  //сработает когда дом будет построен
+    componentDidMount() {
+        this.props.initializeApp()
+      }
+          
 
 
-const App = (props) => {
+
+
+  render(){
+    //alert(this.props.initialized)
+if(!this.props.initialized){
   
+  return  <img src={prelouder} />
+}
+
+
+
   return (
   	<Router>
     <div className="app_wrepper">
@@ -28,21 +55,19 @@ const App = (props) => {
       <Route path="/users" render={ () => <UsersContainer /> } />
       <Route path="/login" render={ () => <Login /> } />
       </div>
-        
-        
-         
-
-
-         
-           
+     
      </div>
      </Router>
-  )
+  )}
 }
 
 
+let mapStateToProps = (state) =>{
+  return{
+    initialized: state.app.initialized,
+
+  }
+}
 
 
-
-
-export default App;
+export default connect(mapStateToProps,{initializeApp})(App);

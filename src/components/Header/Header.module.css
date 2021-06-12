@@ -26,3 +26,45 @@
 	text-transform: uppercase;
 	color: green;
 }
+
+
+
+.header_logout {
+  margin: 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 5px 10px;
+  display: inline-block;
+  border-radius: 100px;
+  border: 1px solid #777;
+  position: relative;
+  -webkit-transition: 0.5s all ease;
+  -o-transition: 0.5s all ease;
+  transition: 0.5s all ease;
+  background-color: #fff;
+  color: #000;
+}
+
+.header_logout:hover {
+  -webkit-transform: translateY(-3px);
+  -ms-transform: translateY(-3px);
+  transform: translateY(-3px);
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.header_logout:active {
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header_name{
+	 font-family: "Roboto", sans-serif;
+	  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+}

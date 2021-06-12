@@ -146,6 +146,7 @@ export const getUsers = (currentPage,pageSize) =>{
 
   return (dispatch) =>{
     dispatch(toggleFeching(true));
+    dispatch(setCurrentPage(currentPage));
          usersAPI.getUsers(currentPage, pageSize).then(data =>{
             dispatch(toggleFeching(false));
         dispatch(setUsers(data.items));

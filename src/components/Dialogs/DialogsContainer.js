@@ -14,7 +14,6 @@ import { compose } from 'redux';
 let mapStateToProps = (state) =>{
 	return{
 		massagesPage: state.massagesPage,
-
 	}
 }
 //эта функция передает функции которые мы будем потом использовать в призентациооной компоненте
@@ -23,8 +22,8 @@ let mapDispatchToProps = (dispatch) =>{
 		onMessageChange:  (body) => {
 			dispatch(updateNewMessageCreator(body));
 		},
-		onAddMassag: () => {
-			dispatch(sendMessageCreator());
+		onAddMassag: (massage) => {
+			dispatch(sendMessageCreator(massage));
 		}
 
 		

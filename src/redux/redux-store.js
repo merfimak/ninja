@@ -5,6 +5,7 @@ import profileReducer from './prpofile_reducer.js';
 import dialogReducer from './dialog_reduser.js';
 import usersReducer from './users_reduser.js';
 import authReducer from './auth_reducer.js';
+import app_reducer from './app_reducer.js';
 import thunkMiddleware from "redux-thunk";
 
 
@@ -13,6 +14,7 @@ let reducers = combineReducers({
 	massagesPage: dialogReducer,
 	usersPage: usersReducer,
 	auth: authReducer,
+	app: app_reducer,
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
