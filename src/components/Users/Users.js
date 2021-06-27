@@ -4,7 +4,7 @@ import * as axios from 'axios';//в axios есть куча всего, * зна
 import { NavLink} from 'react-router-dom';
 import {usersAPI} from '../../api/api.js';
 import React, { useState, useEffect } from 'react';
-
+import zaglushka from '../../assets/images/zaglushka.jpg';
 let Users = (props) => {
 //let usersElements = props.users.map( elem => <div>{elem.fullName}</div>)
 
@@ -84,7 +84,7 @@ pages = pages.slice(StartPaginationCount, EndPaginationCount)
 			 		<div className={classes.user_name}>{elem.name}</div>
 
 			 		 <NavLink to={'/profile/' + elem.id}>
-			 			<div className={classes.user_img}><img src={elem.photos.small === null ? "/img/ava.jpg" : elem.photos.small} /></div>
+			 			<div className={classes.user_img}><img src={elem.photos.small === null ? zaglushka : elem.photos.small} /></div>
 			 		</NavLink>
 
 			 		<div className={classes.user_id}>id - {elem.id}</div>

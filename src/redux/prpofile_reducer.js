@@ -6,6 +6,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const SET_FOTO_SUCCESS = 'SET_FOTO_SUCCESS';
 
 let initialState = {
   postData: [
@@ -73,6 +74,13 @@ let newarr = state.postData.splice(action.postId, 1);//Помните, что Sp
         }
   }
 
+     case SET_FOTO_SUCCESS:{
+   // console.log(state);
+        return {//делаем глубинную копию
+          ...state,
+          profile: {...state.profile, photos: action.photos}
+        }
+  }
 
 
   default:
@@ -124,6 +132,16 @@ export const setStatus = (status) =>{
     status:status
   }
 }
+
+export const savePhotoSuccess = (photos) =>{
+  return{
+    type: SET_FOTO_SUCCESS,
+    photos:photos
+  }
+}
+
+
+
 //это санка
 export const getUsersProfile = (userId) =>{
   return(dispatch) =>{
@@ -153,5 +171,18 @@ export const updateStatus = (status) =>{
       })
   }
 }
+
+
+//это санка
+export const savePhoto = (file) => async (dispatch) => {
+ let response = await profileAPI.savePhoto(file)
+console.log(response)
+console.log(response.data)
+    if(response.data.resultCode === 0 ){
+       dispatch(savePhotoSuccess(response.data.data.photos))         
+      }
+
+  }
+
 
 export default profileReducer;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {getUsersProfile, getStatus, updateStatus} from '../../redux/prpofile_reducer.js';//тут ошибка в названиее prpofile_reducer
+import {getUsersProfile, getStatus, updateStatus, savePhoto} from '../../redux/prpofile_reducer.js';//тут ошибка в названиее prpofile_reducer
 import Profile from './Profile';
 import * as axios from 'axios';//в axios есть куча всего, * значит что все что есть в axios мы запиздячили в наш axios и теперь через него у нас есть доступ ко всему что там есть.
 import { withRouter } from "react-router";
@@ -31,13 +31,35 @@ class ProfileAPIContainer extends React.Component {
 
 		  }
 
+//сработает когда либо пропсы изменяться либо локальный стейт измениться
+componentDidUpdate(prevProps, prevState){
+	if(this.props.match.params.userId !== prevProps.match.params.userId){
+let userId = this.props.match.params.userId;
 
+			if(!userId){
+				userId = this.props.my_id;
+				if(!userId){
+					this.props.history.push("/users")
+				}
+			}
+
+       		this.props.getUsersProfile(userId);//это санка
+       		this.props.getStatus(userId);//это санка
+
+}
+}
 
 
 	render(){
 		 return (
   			 <div>
-              <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+              <Profile {...this.props}
+              isOwner={!this.props.match.params.userId}
+               profile={this.props.profile}
+               status={this.props.status} 
+               updateStatus={this.props.updateStatus}
+                savePhoto={this.props.savePhoto}/>
+            
             </div>
 	  				 )
 		}
@@ -68,7 +90,7 @@ let mapStateToProps = (state) =>({
 });
 
 export default compose(
-	connect(mapStateToProps,{getUsersProfile,getStatus,updateStatus}),//добавляет инфу Props в из State
+	connect(mapStateToProps,{getUsersProfile,getStatus,updateStatus,savePhoto}),//добавляет инфу Props в из State
 	withRouter,//Компонент высшего порядка,withRouter как и connect вернет компоненту но уже с добавлениями данных из url
 	//withAuthRedirect//проверка на авторизацию
 	)(ProfileAPIContainer);
