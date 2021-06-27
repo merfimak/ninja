@@ -52,6 +52,7 @@ margin: 10px;
 .select_page{
 	font-weight: 700;
 	background-color: yellow;
+  border-radius: 50%;
 	padding: 0 5px;
 }
 

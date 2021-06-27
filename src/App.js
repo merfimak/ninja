@@ -1,9 +1,8 @@
 //import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { lazy, Suspense }  from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from './components/NavBar/NavBar';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import HeaderContainer from './components/Header/header_container';
@@ -22,6 +21,8 @@ import prelouder from './assets/images/prelouder.gif';
 import { Provider } from 'react-redux';
 import store from './redux/redux-store.js';
 
+//import ProfileContainer from './components/Profile/ProfileContainer';
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer')); // Ленивая загрузка
 
 
 class App extends React.Component {
@@ -55,7 +56,9 @@ if(!this.props.initialized){
       <NavBar />
       <div className="app_wrepper_content">      
       <Route path="/dialogs" render={ () => <DialogsContainer /> } />
-      <Route path="/profile/:userId?" render={ () => <ProfileContainer /> } />
+     
+          <Route path="/profile/:userId?" render={ () =>  <Suspense fallback={<h2>Louding...</h2>}><ProfileContainer />  </Suspense> } />
+    
       <Route path="/users" render={ () => <UsersContainer /> } />
       <Route path="/login" render={ () => <Login /> } />
       </div>
