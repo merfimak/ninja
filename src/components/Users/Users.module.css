@@ -47,6 +47,7 @@ margin: 10px;
 	max-width: 1200px;
 	overflow: scroll;
 	padding: 10px;
+  align-items: center;
 }
 .select_page{
 	font-weight: 700;
@@ -147,9 +148,19 @@ cursor: pointer;
 }
 
 
+.pagination_btn{
+  display: inline-flex;
+  width: 60px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #000;
+}
 
-
-
+.pagination_btn:hover {
+  color: yellowgreen;
+}
 
 
 

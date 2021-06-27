@@ -19,6 +19,10 @@ import { getAuthUserData } from './redux/auth_reducer.js';
 import { compose } from 'redux';
 import { initializeApp } from './redux/app_reducer.js';
 import prelouder from './assets/images/prelouder.gif';
+import { Provider } from 'react-redux';
+import store from './redux/redux-store.js';
+
+
 
 class App extends React.Component {
     constructor(props) {
@@ -44,7 +48,7 @@ if(!this.props.initialized){
 
 
   return (
-  	<Router>
+  	
     <div className="app_wrepper">
 
       <HeaderContainer />
@@ -57,7 +61,7 @@ if(!this.props.initialized){
       </div>
      
      </div>
-     </Router>
+     
   )}
 }
 
@@ -70,4 +74,21 @@ let mapStateToProps = (state) =>{
 }
 
 
-export default connect(mapStateToProps,{initializeApp})(App);
+
+let AppContainer =  compose(
+//withRouter,
+connect(mapStateToProps,{initializeApp}))(App);
+
+let SamuraiJSApp = (props) => {
+  return   <Router>
+          <Provider store={store}>{/*штука из react-redux, позволяет добратьсядо store из контейнеров компонент*/}
+            
+                <AppContainer  />
+             
+          </Provider>
+ </Router>
+
+
+}
+
+export default SamuraiJSApp;

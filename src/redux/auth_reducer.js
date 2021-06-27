@@ -53,24 +53,22 @@ export const setErrorToLoginForm = (error) =>{
 }
 
 //это санка
-export const getAuthUserData = () =>{
+export const getAuthUserData = () =>  async (dispatch) =>{
+ let response =  await authAPI.me();
 
-  return(dispatch) =>{
-  return authAPI.me().then(response =>{////80 ur 20 min dispatch может возвращать промисы
-      console.log(response.data.data)
             if(response.data.resultCode === 0){
               dispatch(setAuthUserDataCreator(response.data.data, true))
             }
-        })
+        
    }
-}
+
 
 
 //это санка
 export const login = (email, password, rememberMe) =>{
 
-  return(dispatch) =>{
-     authAPI.login(email, password, rememberMe).then(response =>{
+  return async (dispatch) =>{
+     let response =  await authAPI.login(email, password, rememberMe)
       //console.log(response.data.resultCode)
             if(response.data.resultCode === 0){
               dispatch(getAuthUserData())
@@ -78,7 +76,7 @@ export const login = (email, password, rememberMe) =>{
               console.log(response.data.messages)
              dispatch(setErrorToLoginForm(response.data.messages))//response.data.messages[0]
             }
-        })
+        
    }
 }
 

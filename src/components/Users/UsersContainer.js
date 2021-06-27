@@ -15,6 +15,7 @@ import {getUsersSelector,
 		getcurrentPage,
 		getisFetching,
 		getfollowingInProgress,
+		getPagination_size
 } from '../../redux/users_selectors.js';
 /*
 import {followActionCreator} from '../../redux/users_reduser.js';
@@ -42,7 +43,13 @@ class UsersAPIcomponent extends React.Component {
 
 		  }
 		onPagaChanged = (pageNumber) => {
+			/*alert(pageNumber)
+			if(pageNumber < 1){
+				pageNumber = 1;
+				}
+alert(pageNumber)*/
 				this.props.getUsers(pageNumber,this.props.pageSize)
+			
 		}
 		render(){
 		return( 
@@ -57,6 +64,7 @@ class UsersAPIcomponent extends React.Component {
 						pageSize={this.props.pageSize}
 						followingInProgress={this.props.followingInProgress}
 						toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+						pagination_size={this.props.pagination_size}
 						
 				/>
 				
@@ -89,6 +97,7 @@ let mapStateToProps = (state) =>{
 		currentPage: getcurrentPage(state),
 		isFetching: getisFetching(state),
 		followingInProgress: getfollowingInProgress(state),
+		pagination_size: getPagination_size(state),
 
 	}
 }

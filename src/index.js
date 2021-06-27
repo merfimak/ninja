@@ -4,8 +4,9 @@ import store from './redux/redux-store.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import { Provider } from 'react-redux';
+//import App from './App';
+import SamuraiJSApp from './App';
+
 
 
 
@@ -13,11 +14,10 @@ import { Provider } from 'react-redux';
 
 
 	ReactDOM.render(
-		  	<Provider store={store}>{/*штука из react-redux, позволяет добратьсядо store из контейнеров компонент*/}
 		  
-		    	<App  />
+		    	<SamuraiJSApp  />,
 		  	
-		    </Provider>,
+		
 		  document.getElementById('root')
 	);
 

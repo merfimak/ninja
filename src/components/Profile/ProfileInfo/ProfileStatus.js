@@ -53,7 +53,7 @@ componentDidUpdate(prevProps, prevState){
 render(){
 		return (
 			<div className={classes.profile_status}>
-			{console.log(this.props.status)}
+			{console.log('tttotot')}
 				{!this.state.editMode &&
 			    	<div>
 			    		<span onDoubleClick={ this.activateEditMod  }>{this.props.status || "_____"}</span>

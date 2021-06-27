@@ -7,7 +7,7 @@ import Post from './Post/Post';
 
 
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
 
 
 //console.log(props)
@@ -52,7 +52,7 @@ let postsElements = props.profilePage.postData.map( elem => <Post massage={elem.
 
     
    )
-}
+})
 
 
 export default MyPosts;

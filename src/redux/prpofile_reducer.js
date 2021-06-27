@@ -5,6 +5,7 @@ const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
   postData: [
@@ -34,6 +35,16 @@ switch (action.type) {
         newPostText: ''
       }
 
+   }
+   case DELETE_POST:{//action creator делаем через tdd
+ //здесь у меня не получилось так как у димыча и я использовал метод splice
+let newarr = state.postData.splice(action.postId, 1);//Помните, что Splice изменяет исходный массив, поэтому, когда вы делаете
+
+         return {//делаем глубинную копию
+        //...state, postData: state.postData.filter(p => p.id != action.postId)//Метод filter() создаёт новый массив со всеми элементами, прошедшими проверку, задаваемую в передаваемой функции.
+     
+      ...state, postData: state.postData
+      }
    }
   case UPDATE_NEW_POST_TEXT:{
    // console.log(state);
@@ -83,6 +94,15 @@ export const addPostActionCreator = () =>{
     type: ADD_POST,
   }
 }
+
+//action creator делаем через tdd
+export const deletePost = (postId) =>{
+  return{
+    type: DELETE_POST,
+  }
+}
+
+
 //action creator импортим его в MyPosts.js
 export const updateNewPostActionCreator = (text) =>{
   return{

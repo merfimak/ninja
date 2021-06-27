@@ -21,3 +21,7 @@ export const getisFetching = (state) => {
 export const getfollowingInProgress = (state) => {
 	return state.usersPage.followingInProgress
 }
+
+export const getPagination_size = (state) => {
+	return state.usersPage.pagination_size
+}
