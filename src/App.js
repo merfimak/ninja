@@ -83,7 +83,7 @@ let AppContainer =  compose(
 connect(mapStateToProps,{initializeApp}))(App);
 
 let SamuraiJSApp = (props) => {
-  return   <Router>
+  return   <Router basename={process.env.PUBLIC_URL}>
           <Provider store={store}>{/*штука из react-redux, позволяет добратьсядо store из контейнеров компонент*/}
             
                 <AppContainer  />
