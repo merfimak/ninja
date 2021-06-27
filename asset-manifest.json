@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/sumuriy_react/static/css/main.e44a506f.chunk.css",
+    "main.js": "/sumuriy_react/static/js/main.2b82b3ee.chunk.js",
+    "main.js.map": "/sumuriy_react/static/js/main.2b82b3ee.chunk.js.map",
+    "runtime-main.js": "/sumuriy_react/static/js/runtime-main.c41ceed8.js",
+    "runtime-main.js.map": "/sumuriy_react/static/js/runtime-main.c41ceed8.js.map",
+    "static/js/2.1459de09.chunk.js": "/sumuriy_react/static/js/2.1459de09.chunk.js",
+    "static/js/2.1459de09.chunk.js.map": "/sumuriy_react/static/js/2.1459de09.chunk.js.map",
+    "static/css/3.e29bf0b2.chunk.css": "/sumuriy_react/static/css/3.e29bf0b2.chunk.css",
+    "static/js/3.c7ea2fa1.chunk.js": "/sumuriy_react/static/js/3.c7ea2fa1.chunk.js",
+    "static/js/3.c7ea2fa1.chunk.js.map": "/sumuriy_react/static/js/3.c7ea2fa1.chunk.js.map",
+    "static/js/4.b15b8237.chunk.js": "/sumuriy_react/static/js/4.b15b8237.chunk.js",
+    "static/js/4.b15b8237.chunk.js.map": "/sumuriy_react/static/js/4.b15b8237.chunk.js.map",
+    "index.html": "/sumuriy_react/index.html",
+    "static/css/3.e29bf0b2.chunk.css.map": "/sumuriy_react/static/css/3.e29bf0b2.chunk.css.map",
+    "static/css/main.e44a506f.chunk.css.map": "/sumuriy_react/static/css/main.e44a506f.chunk.css.map",
+    "static/js/2.1459de09.chunk.js.LICENSE.txt": "/sumuriy_react/static/js/2.1459de09.chunk.js.LICENSE.txt",
+    "static/media/prelouder.gif": "/sumuriy_react/static/media/prelouder.b2a8fa3d.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c41ceed8.js",
+    "static/js/2.1459de09.chunk.js",
+    "static/css/main.e44a506f.chunk.css",
+    "static/js/main.2b82b3ee.chunk.js"
+  ]
+}
